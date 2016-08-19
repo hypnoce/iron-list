@@ -1015,7 +1015,7 @@ will only render 20.
     _render: function() {
       var requiresUpdate = this._virtualCount > 0 || this._physicalCount > 0;
 
-      if (this.isAttached && !this._itemsRendered && this._isVisible && requiresUpdate) {
+      if (this.isAttached && !this._itemsRendered && requiresUpdate && this._isVisible) {
         this._lastPage = 0;
         this._update();
         this._itemsRendered = true;
@@ -1134,7 +1134,7 @@ will only render 20.
      * to `items`, splices or updates to a single item.
      */
     _itemsChanged: function(change) {
-      if (change.path === 'items') {
+      if (change.path === 'items' && ((this._virtualCount !== this.items.length) || this.items.length !== 0)) {
         // reset items
         this._virtualStart = 0;
         this._physicalTop = 0;
@@ -1399,7 +1399,7 @@ will only render 20.
      * Sets the position of the scroll.
      */
     _resetScrollPosition: function(pos) {
-      if (this.scrollTarget) {
+      if (this.scrollTarget && this._scrollPosition !== pos) {
         this._scrollTop = pos;
         this._scrollPosition = this._scrollTop;
       }
