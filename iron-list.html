@@ -378,6 +378,11 @@ will only render 20.
       multiSelection: {
         type: Boolean,
         value: false
+      },
+
+      rowHeight: {
+        type: Number,
+        value: null
       }
     },
 
@@ -1286,7 +1291,7 @@ will only render 20.
       this._iterateItems(function(pidx, vidx) {
 
         oldPhysicalSize += this._physicalSizes[pidx] || 0;
-        this._physicalSizes[pidx] = this._physicalItems[pidx].offsetHeight;
+        this._physicalSizes[pidx] = this.rowHeight || this._physicalItems[pidx].offsetHeight;
         newPhysicalSize += this._physicalSizes[pidx];
         this._physicalAverageCount += this._physicalSizes[pidx] ? 1 : 0;
 
